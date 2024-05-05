@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity() {
     private lateinit var tvAmtDisplay: TextView
     private lateinit var tvResultDisplay: TextView
+    private lateinit var items: ArrayList<Double>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         tvAmtDisplay = findViewById(R.id.tvAmtDisplay)
         tvResultDisplay = findViewById(R.id.tvResultDisplay)
+        items = ArrayList()
     }
 
     fun onClickHandle(view: View) {
@@ -79,10 +81,10 @@ class MainActivity : AppCompatActivity() {
 
         // Arranging output as newly formed
         for ((index, number) in amountArrayList.withIndex()) {
-            if (index == amountArrayList.count() - 2)
-                output += ".$number"
+            output += if (index == amountArrayList.count() - 2)
+                ".$number"
             else
-                output += "$number"
+                "$number"
         }
 
         tvAmtDisplay.text = output
@@ -108,15 +110,34 @@ class MainActivity : AppCompatActivity() {
 
             // Arranging output as newly formed
             for ((index, number) in amountArrayList.withIndex()) {
-                if (index == amountArrayList.count() - 2)
-                    output += ".$number"
+                output += if (index == amountArrayList.count() - 2)
+                    ".$number"
                 else
-                    output += "$number"
+                    "$number"
             }
             tvAmtDisplay.text = output
         }
     }
     fun onAddClick(view: View) {
-        // ToDo: Functionality to still be added.
+        val currentText = tvAmtDisplay.text.toString().removePrefix("R")
+        val checkIfNotBlank = currentText.isNotEmpty() && currentText.toDouble() > 0
+        if (checkIfNotBlank) {
+            items.add(currentText.toDouble())
+            updateOutPutUI()
+        }
+    }
+
+    private fun updateOutPutUI() {
+        var totalAmt = 0.00
+        var output = ""
+
+        items.forEach { item ->
+            totalAmt += item; output += "R" + String.format("%.2f", item) + "\n"
+        }
+
+        output += "---------------------------\nR" + String.format("%.2f", totalAmt)
+
+        tvResultDisplay.text = output
+        tvAmtDisplay.text = applicationContext.getString(R.string.string_rand_initial_value)
     }
 }
