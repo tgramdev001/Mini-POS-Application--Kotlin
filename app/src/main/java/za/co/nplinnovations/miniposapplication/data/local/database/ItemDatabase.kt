@@ -6,7 +6,7 @@ import za.co.nplinnovations.miniposapplication.data.local.dao.ItemDao
 import za.co.nplinnovations.miniposapplication.data.local.entity.Item
 
 
-@Database(entities = [Item::class], version = 1)
+@Database(entities = [Item::class], version = 1, exportSchema = false)
 abstract class ItemDatabase : RoomDatabase() {
     abstract fun itemDao(): ItemDao
 }
