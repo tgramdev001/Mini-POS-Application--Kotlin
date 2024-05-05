@@ -2,7 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MiniPOSApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/buttonAndSecondaryColour</item>
+        <item name="colorSecondary">@color/secondaryBackground</item>
+        <item name="android:colorBackground">@color/currentBackground</item>
+        <item name="android:textColor">@color/primaryText</item>
     </style>
 
     <style name="Theme.MiniPOSApplication" parent="Base.Theme.MiniPOSApplication" />
