@@ -1,10 +1,12 @@
 package za.co.nplinnovations.miniposapplication.data.local.dao
 
+import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import za.co.nplinnovations.miniposapplication.data.local.entity.Item
 
+@Dao
 interface ItemDao {
     @Insert
     suspend fun insert(item: Item)
